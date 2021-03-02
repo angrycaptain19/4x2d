@@ -63,7 +63,7 @@ class UIEnabledState(State):
                     my <= sprite.rect[1] + sprite.rect[3]):
                     sprite_found = sprite
                     break
-            
+
             if input in ["mouse_move", "mouse_drag"]:
                 #if not self.clicking_sprite:
                 if not sprite_found and self.hover_sprite: # Mouse Exit
@@ -79,10 +79,10 @@ class UIEnabledState(State):
                     self.hover_sprite = sprite_found
                     self.hover_sprite.on_mouse_enter(event.gpos)
 
-                if input == "mouse_drag" and self.clicking_sprite:
-                    self.dragging_from_sprite = self.clicking_sprite
-                    self.dragging_to = event.gpos
-                    self.clicking_sprite.on_drag(event.gpos)
+            if input == "mouse_drag" and self.clicking_sprite:
+                self.dragging_from_sprite = self.clicking_sprite
+                self.dragging_to = event.gpos
+                self.clicking_sprite.on_drag(event.gpos)
 
             if input == "click":
                 if self.hover_sprite:
@@ -91,7 +91,7 @@ class UIEnabledState(State):
                     self.last_clicked_sprite = self.clicking_sprite
                 else:
                     self.deselect()
-            
+
             if input == "unclick":
                 if self.clicking_sprite:
                     self.clicking_sprite.on_mouse_up(event.gpos)
@@ -228,7 +228,7 @@ class OrderShipsState(UIEnabledState):
             if ship == "colonist":
                 self.planet_from.emit_ship(ship, {"to":self.planet_to, "num":num})
             else:
-                for i in range(num):
+                for _ in range(num):
                     self.planet_from.emit_ship(ship, {"to":self.planet_to})
         self.scene.sm.transition(PlayState(self.scene))
 
@@ -270,13 +270,12 @@ class UpgradeState(UIEnabledState):
         self.scene.sm.transition(PlayState(self.scene))
 
     def on_select(self, upgrade):
-        if upgrade.cursor == None:
-            self.pending_upgrade = upgrade
+        self.pending_upgrade = upgrade
+        if upgrade.cursor is None:
             self.scene.my_civ.civ_upgrades.append(upgrade.name)
             upgrade().apply(self.scene.my_civ)
             self.finish()
         else:
-            self.pending_upgrade = upgrade
             self.cursor_type = upgrade.cursor
             self.cursor_icon = SimpleSprite(V2(0,0), "assets/i-planet-cursor.png")
             self.cursor_icon.offset = (0.5, 0.5)
@@ -326,7 +325,7 @@ class GameOverState(State):
         return super().enter()
 
     def take_input(self, input, event):
-        if input == "action" or input == "click":
+        if input in ["action", "click"]:
             self.scene.game.scene = levelscene.LevelScene(self.scene.game)
             self.scene.game.scene.start()
                 

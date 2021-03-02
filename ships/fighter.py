@@ -49,7 +49,7 @@ class Fighter(Ship):
             self.pos += -towards * 2
             self.thrust_particle_time = THRUST_PARTICLE_RATE
 
-            for i in range(10):
+            for _ in range(10):
                 pvel = (towards + V2(random.random() * 0.75, random.random() * 0.75)).normalized() * 30 * (random.random() + 0.25)
                 p = Particle([PICO_WHITE, PICO_WHITE, PICO_BLUE, PICO_DARKBLUE, PICO_DARKBLUE], 1, self.pos, 0.2 + random.random() * 0.15, pvel)
                 self.scene.game_group.add(p)
@@ -68,7 +68,10 @@ class Fighter(Ship):
         return [e for e in enemies if (e.pos - self.pos).sqr_magnitude() < threat_range ** 2]
 
     def dogfight(self, threats, dt):
-        if self.current_dogfight_target == None or self.current_dogfight_target.health <= 0:
+        if (
+            self.current_dogfight_target is None
+            or self.current_dogfight_target.health <= 0
+        ):
             self.current_dogfight_target = random.choice(threats)
         dist = (self.current_dogfight_target.pos - self.pos).sqr_magnitude()
         if dist < RANGE ** 2:
@@ -116,10 +119,7 @@ class Fighter(Ship):
         self.force_travel_time -= dt
 
         if self.state == "traveling" or self.force_travel_time > 0:
-            if self.can_land(self.target):
-                self.orbits = False
-            else:
-                self.orbits = True
+            self.orbits = not self.can_land(self.target)
             self.travel_to_target(dt)
 
         elif self.state == "firing":
@@ -146,7 +146,7 @@ class Fighter(Ship):
                 if delta < dist:
                     dist = delta
                     self.target = p
-            
+
 
         self._update_image()       
 

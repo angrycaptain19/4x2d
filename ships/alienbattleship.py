@@ -40,7 +40,7 @@ class AlienBattleship(Fighter):
             #self.pos += -towards * 1
             self.thrust_particle_time = THRUST_PARTICLE_RATE
 
-            for i in range(10):
+            for _ in range(10):
                 pvel = (towards + V2(random.random() * 0.75, random.random() * 0.75)).normalized() * 30 * (random.random() + 0.25)
                 p = Particle([PICO_WHITE, PICO_WHITE, PICO_BLUE, PICO_DARKBLUE, PICO_DARKBLUE], 1, self.pos + towards * 4, 0.2 + random.random() * 0.15, pvel)
                 self.scene.game_group.add(p)

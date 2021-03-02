@@ -34,8 +34,5 @@ class ShipCounter(SpriteBase):
         if self.planet.ships['fighter'] != self._num_ships:
             self._num_ships = self.planet.ships['fighter']
             self._generate_image()
-            if self._num_ships == 0:
-                self.visible = False
-            else:
-                self.visible = True
+            self.visible = self._num_ships != 0
         return super().update(dt)

@@ -37,14 +37,16 @@ class OrderArrow(SpriteBase):
         side = V2(forward.y, -forward.x)
         pt1 += forward * start_offset
         pt2 += forward * -end_offset
-        points = []
-        points.append(pt1 + side * -ht)
-        points.append(pt1 + side * ht)
-        points.append(pt2 + side * ht + forward * -15)
-        points.append(pt2 + side * 15 + forward * -15)
-        points.append(pt2)
-        points.append(pt2 + side * -15 + forward * -15)
-        points.append(pt2 + side * -ht + forward * -15)
+        points = [
+            pt1 + side * -ht,
+            pt1 + side * ht,
+            pt2 + side * ht + forward * -15,
+            pt2 + side * 15 + forward * -15,
+            pt2,
+            pt2 + side * -15 + forward * -15,
+            pt2 + side * -ht + forward * -15,
+        ]
+
         points = [p.tuple() for p in points]
 
         arrow1 = pt2 + forward * - 10 + side * 10

@@ -86,7 +86,7 @@ class ArmoryBuilding(Building):
         threats = planet.get_threats()
         if self.fire_time > self.FIRE_RATE and threats:
             self.fire_time = 0
-            for i in range(planet.population):
+            for _ in range(planet.population):
                 angle = random.random() * 6.2818
                 b = Bullet(
                     planet.pos + V2.from_angle(angle) * planet.get_radius(),

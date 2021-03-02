@@ -36,7 +36,7 @@ class EnemyController:
             if not self.homeworld:
                 self.homeworld = my_planets[0]
             self.homeworld.health = self.homeworld.get_max_health()
-            self._status.append("planets: " + ", ".join([str(p.pos) for p in my_planets]))            
+            self._status.append("planets: " + ", ".join(str(p.pos) for p in my_planets))
             self.building_time += dt * general_rate
             if self.building_time > BUILDING_TIME:
                 self.building_time = 0
@@ -61,7 +61,10 @@ class EnemyController:
             near_planets = self.scene.get_planets()
             near_planets.sort(key=lambda x:(x.pos - self.homeworld.pos).sqr_magnitude())
             near_unclaimed = [p for p in near_planets if p.owning_civ != self.civ][0:3]
-            self._status.append("near unclaimed: " + ", ".join([str(p.pos) for p in near_unclaimed]))
+            self._status.append(
+                "near unclaimed: " + ", ".join(str(p.pos) for p in near_unclaimed)
+            )
+
             if self.invade_timer > max(INVADE_TIME - self.battleship_wave, 4):
                 target = random.choice(near_unclaimed)
                 my_planets_with_fighters = [p for p in my_planets if p.ships['alien-fighter'] > 0]

@@ -27,9 +27,9 @@ class Tilemap(pygame.sprite.Sprite):
 
     def clear_grid(self):
         self._grid = []
-        for row in range(self.num_rows):
+        for _ in range(self.num_rows):
             self._grid.append([])
-            for col in range(self.num_columns):
+            for _ in range(self.num_columns):
                 self._grid[-1].append(-1)
 
         self._dirty_rects = [pygame.Rect(

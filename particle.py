@@ -22,8 +22,8 @@ class Particle(framesprite.FrameSprite):
     def update(self, dt):
         self.time -= dt
         self.pos += self.vel * dt
-        i = int((1 - self.time / self.initial_time) * self._num_frames)
         if self.time <= 0:
             self.kill()
-        else:        
+        else:    
+            i = int((1 - self.time / self.initial_time) * self._num_frames)
             self.frame = clamp(i, 0, self._num_frames - 1)

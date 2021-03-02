@@ -75,7 +75,7 @@ class LevelScene(scene.Scene):
         # TODO: Planet resources more constrained
         while num_planets < 15:
             pos = V2(random.randint(30, game.RES[0] - 30), random.randint(30, game.RES[1] - 30))
-            
+
             near_button = pygame.Rect(game.RES[0] / 2 - 100, game.RES[1] - 60, 200, 60)
             if near_button.collidepoint(*pos.tuple()):
                 continue
@@ -83,7 +83,7 @@ class LevelScene(scene.Scene):
             near_meters = pygame.Rect(0, 0, 250, 60)
             if near_meters.collidepoint(*pos.tuple()):
                 continue            
-            
+
             dist = 999999
             for planet in self.get_planets():
                 delta = (planet.pos - pos).sqr_magnitude()
@@ -149,7 +149,7 @@ class LevelScene(scene.Scene):
 
         self.score_label = Text("- Score -", "small", V2(game.RES[0] - 2, 2), PICO_BLUE)
         self.score_label.offset = (1, 0)
-        self.score_label._recalc_rect()        
+        self.score_label._recalc_rect()
         self.ui_group.add(self.score_label)
 
         self.score_text = Text("0", "small", V2(game.RES[0] - 2, 12), PICO_BLUE)
@@ -178,7 +178,7 @@ class LevelScene(scene.Scene):
                 self.my_civ.resources.set_resource("gas", 50)
 
         if self.options == "fighters":
-            for i in range(20):
+            for _ in range(20):
                 homeworld.add_ship("fighter")
 
         if self.options == "battleship":

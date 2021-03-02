@@ -12,7 +12,7 @@ class PlanetPanel(Panel):
     def __init__(self, planet):
         Panel.__init__(self, (5,5), planet)
         self.planet = planet
-        
+
         owner = "Neutral"
         color = PICO_YELLOW
         is_mine = False
@@ -26,7 +26,7 @@ class PlanetPanel(Panel):
 
         self.tab = {'text':'%s Planet' % owner, 'color':color, 'icon':'assets/i-planet.png'}
         self.add(Text("Resources", "small", (0,0), PICO_WHITE, False), V2(0,0))
-        
+
         y = 15
         chart_data = {}
         for r in RESOURCES:
@@ -37,7 +37,7 @@ class PlanetPanel(Panel):
                 self.add(Text("%s%%" % pr, "small", (0,0), PICO_WHITE, False), V2(40,y+2))
                 y += 15
                 chart_data[RESOURCE_COLORS[r]] = pr
-      
+
         self.add(PieChart((0,0), chart_data), V2(70, 10))
 
         y = max(y + 7, 41)
@@ -64,7 +64,6 @@ class PlanetPanel(Panel):
                     self.add(SimpleSprite((0,0), 'assets/i-%s.png' % ship), V2(0,y))
                 except:
                     print("ERROR FINDING ICON FOR %s" % ship)
-                    pass
                 self.add(Text("%ss" % ship.title(), "small", (0,0), PICO_WHITE, False), V2(15,y + 2))
                 color = PICO_WHITE
                 if planet.ships[ship] > planet.get_max_fighters():

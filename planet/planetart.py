@@ -16,8 +16,7 @@ def generate_color_art(radius, angle = None):
         dist,angle = planet_pos.to_polar()
         angle += wavy_angle
         p2 = offset + V2.from_angle(angle) * dist * spherize
-        color = wavy.get_at((int(p2.x), int(p2.y)))
-        return color
+        return wavy.get_at((int(p2.x), int(p2.y)))
 
     color_image = pygame.Surface((w,h), pygame.SRCALPHA)
     center = V2(w / 2 - 0.5, h / 2 - 0.5)
@@ -59,14 +58,14 @@ def palettize(img, brightness1, brightness2, color1, color2):
     return out_img
 
 def get_min_max_from_buckets(buckets, rat):
-    offset = 0.5 + rat /2 
+    offset = 0.5 + rat /2
     minb = None
     maxb = None
     for i in range(len(buckets)):
-        if minb == None and buckets[i] >= offset - rat / 2:
+        if minb is None and buckets[i] >= offset - rat / 2:
             minb = i
-        if maxb == None and buckets[i] >= offset + rat / 2:
-            maxb = i       
+        if maxb is None and buckets[i] >= offset + rat / 2:
+            maxb = i
     return (minb, maxb)
 
 def generate_planet_art(radius, white_pct, blue_pct, red_pct):

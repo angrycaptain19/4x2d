@@ -8,10 +8,7 @@ class SpriteBase(pygame.sprite.DirtySprite):
         self.image = None
         self._width = 0
         self._height = 0
-        if isinstance(pos, V2):
-            self._pos = pos
-        else:
-            self._pos = V2(*pos)
+        self._pos = pos if isinstance(pos, V2) else V2(*pos)
         self.offset = (0,0)
         self._recalc_rect()
 
@@ -44,10 +41,7 @@ class SpriteBase(pygame.sprite.DirtySprite):
 
     @pos.setter
     def pos(self, value):
-        if isinstance(value, V2):
-            self._pos = value
-        else:
-            self._pos = V2(*value)
+        self._pos = value if isinstance(value, V2) else V2(*value)
         self._recalc_rect()
 
     @property

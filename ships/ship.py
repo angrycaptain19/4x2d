@@ -115,9 +115,8 @@ class Ship(AnimRotSprite, Healthy):
 
         towards = (self.target.pos - self.pos).normalized()
         nearest,dist = helper.get_nearest(self.pos, self.scene.get_planets())
-        if nearest:
-            if dist < (nearest.get_radius() + WARP_PLANET_MIN_DIST) ** 2:
-                return
+        if nearest and dist < (nearest.get_radius() + WARP_PLANET_MIN_DIST) ** 2:
+            return
 
         if self.warp_drive_t < 0.66:
             self.velocity = V2(0,0)

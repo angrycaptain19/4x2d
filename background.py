@@ -13,15 +13,15 @@ class Background(SpriteBase):
     def _generate_image(self):
         self.image = pygame.Surface(game.RES, pygame.SRCALPHA)
 
-        for i in range(90):
+        for _ in range(90):
             self.image.set_at((random.randint(0, game.RES[0]),random.randint(0, game.RES[1])), PICO_LIGHTGRAY)        
 
         GS = 20
         ix = game.RES[0] // GS
         iy = game.RES[1] // GS
         for i in range(ix):
+            x = int(i * GS + GS / 2)
             for j in range(iy):
-                x = int(i * GS + GS / 2)
                 y = int(j * GS + GS / 2)
                 colors = [PICO_DARKGRAY, PICO_DARKBLUE, PICO_PURPLE]
                 colorf = math.sin(pow(x / 175, 1.8) + y / 30) * 1.25 + 1.5

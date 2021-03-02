@@ -81,10 +81,7 @@ def render_multiline(text, size, color, wrap_width=None, center=True):
     y = 0
     for line in lines:
         _,_,fw,fh = f.get_rect(line)
-        if center:
-            x = (w - fw) // 2
-        else:
-            x = 0
+        x = (w - fw) // 2 if center else 0
         f.render_to(text_surf, (x,y), line, color, (0,0,0,0))
         y += fh + 2
     return text_surf

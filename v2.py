@@ -36,7 +36,7 @@ class V2:
     def __mul__(self, scalar):
         """Multiplication of a vector by a scalar."""
 
-        if isinstance(scalar, int) or isinstance(scalar, float):
+        if isinstance(scalar, (int, float)):
             return V2(self.x*scalar, self.y*scalar)
         raise NotImplementedError('Can only multiply V2 by a scalar')
 

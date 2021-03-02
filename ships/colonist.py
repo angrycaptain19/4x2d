@@ -29,10 +29,7 @@ class Colonist(Ship):
             other.needs_panel_update = True
 
     def update(self, dt):
-        if self.can_land(self.target):
-            self.orbits = False
-        else:
-            self.orbits = True
+        self.orbits = not self.can_land(self.target)
         self.default_update(dt)
         self.num_label.pos = self.pos + V2(7, -7)
         return super().update(dt)
